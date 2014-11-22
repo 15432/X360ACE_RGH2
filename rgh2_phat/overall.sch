@@ -18,6 +18,9 @@
         <signal name="XLXN_12" />
         <signal name="SCL" />
         <signal name="SDA" />
+        <signal name="XLXN_15" />
+        <signal name="XLXN_16" />
+        <signal name="XLXN_17" />
         <port polarity="Input" name="POST" />
         <port polarity="Input" name="CLK" />
         <port polarity="Output" name="DBG" />
@@ -68,11 +71,18 @@
             <line x2="384" y1="-96" y2="-96" x1="320" />
             <line x2="384" y1="-32" y2="-32" x1="320" />
         </blockdef>
+        <blockdef name="reset_proc">
+            <timestamp>2014-11-22T20:39:21</timestamp>
+            <rect width="256" x="64" y="-128" height="128" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <line x2="0" y1="-32" y2="-32" x1="64" />
+            <line x2="384" y1="-96" y2="-96" x1="320" />
+        </blockdef>
         <block symbolname="post_proc" name="XLXI_1">
             <blockpin signalname="POST" name="POSTBIT" />
             <blockpin signalname="XLXN_3" name="is_10" />
             <blockpin signalname="XLXN_11" name="to_slow" />
-            <blockpin name="to_count" />
+            <blockpin signalname="XLXN_15" name="to_count" />
             <blockpin signalname="XLXN_5" name="to_hr" />
             <blockpin signalname="DBG" name="DBG" />
         </block>
@@ -99,6 +109,11 @@
             <blockpin signalname="XLXN_11" name="to_slow" />
             <blockpin signalname="SCL" name="SCL" />
             <blockpin signalname="SDA" name="SDA" />
+        </block>
+        <block symbolname="reset_proc" name="XLXI_7">
+            <blockpin signalname="XLXN_15" name="to_count" />
+            <blockpin signalname="CLK" name="CLK" />
+            <blockpin signalname="RST" name="RST" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -143,6 +158,8 @@
             <wire x2="896" y1="1648" y2="1648" x1="752" />
             <wire x2="896" y1="1648" y2="1744" x1="896" />
             <wire x2="912" y1="1744" y2="1744" x1="896" />
+            <wire x2="896" y1="1744" y2="1872" x1="896" />
+            <wire x2="1408" y1="1872" y2="1872" x1="896" />
             <wire x2="912" y1="1552" y2="1552" x1="896" />
             <wire x2="896" y1="1552" y2="1648" x1="896" />
         </branch>
@@ -153,9 +170,15 @@
         </branch>
         <iomarker fontsize="28" x="1856" y="1344" name="DBG" orien="R0" />
         <branch name="RST">
-            <wire x2="2192" y1="1632" y2="1632" x1="2160" />
+            <wire x2="1936" y1="1808" y2="1808" x1="1792" />
+            <wire x2="1936" y1="1776" y2="1808" x1="1936" />
+            <wire x2="2096" y1="1776" y2="1776" x1="1936" />
+            <wire x2="2176" y1="1776" y2="1776" x1="2096" />
+            <wire x2="2096" y1="1776" y2="1856" x1="2096" />
+            <wire x2="2176" y1="1856" y2="1856" x1="2096" />
+            <wire x2="2176" y1="1632" y2="1632" x1="2160" />
+            <wire x2="2176" y1="1632" y2="1776" x1="2176" />
         </branch>
-        <iomarker fontsize="28" x="2192" y="1632" name="RST" orien="R0" />
         <instance x="2112" y="1440" name="XLXI_6" orien="R0">
         </instance>
         <branch name="XLXN_11">
@@ -178,5 +201,15 @@
             <wire x2="2528" y1="1408" y2="1408" x1="2496" />
         </branch>
         <iomarker fontsize="28" x="2528" y="1408" name="SDA" orien="R0" />
+        <instance x="1408" y="1904" name="XLXI_7" orien="R0">
+        </instance>
+        <branch name="XLXN_15">
+            <wire x2="1392" y1="1744" y2="1808" x1="1392" />
+            <wire x2="1408" y1="1808" y2="1808" x1="1392" />
+            <wire x2="2512" y1="1744" y2="1744" x1="1392" />
+            <wire x2="2512" y1="1216" y2="1216" x1="1824" />
+            <wire x2="2512" y1="1216" y2="1744" x1="2512" />
+        </branch>
+        <iomarker fontsize="28" x="2176" y="1856" name="RST" orien="R0" />
     </sheet>
 </drawing>
