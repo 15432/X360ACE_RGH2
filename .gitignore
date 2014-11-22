@@ -1,0 +1,15 @@
+*.lso
+*.cmd_log
+*.spl
+*.sym
+*.xreport
+*.jhd
+*.prj
+*.stx
+*.gise
+*.html
+*.schlog
+*.xst
+*.vho
+*.xmsgs
+*.ref
