@@ -18,7 +18,7 @@ process (POSTBIT) is
 begin
 	if POSTBIT'event then --bad sync, replace this later with CLK filtering
 		if is_10 = '1' then --should be reliable even after hr
-			postcnt <= 10;
+			postcnt <= 12;
 		else
 			if(postcnt < post_max) then
 				postcnt <= postcnt + 1;

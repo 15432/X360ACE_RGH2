@@ -21,6 +21,10 @@ begin
 			rst_counter <= 0;
 		end if;
 		
+		if(rst_counter < 20000) then
+			rst_counter <= rst_counter + 1;
+		end if;
+		
 		if(rst_counter > 16800 and rst_counter < 17100) then
 			is_10 <= '1';
 		else
