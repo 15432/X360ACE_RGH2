@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- this shit saves the 1.5 seconds per cycle
+-- this shit saves the 1.5 seconds (only in case of successfull start)
 
 entity delayer is
     Port ( to_slow : in  STD_LOGIC;
