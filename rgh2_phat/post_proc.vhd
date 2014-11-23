@@ -35,7 +35,7 @@ end process;
 
 process (clk) is
 begin
-if rising_edge(CLK) then
+if CLK'event then
 	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
 		if(cnt < T_END) then
 			cnt <= cnt + 1;
