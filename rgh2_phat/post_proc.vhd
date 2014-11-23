@@ -11,7 +11,7 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_START: integer := 54231; --lol, almost 54321 / 15432
+constant R_START: integer := 54236; --lol, almost 54321 / 15432
 constant T_END: integer := 65535;
 constant SIZE: integer := 18;
 constant RESET_VECTOR : STD_LOGIC_VECTOR(0 to SIZE) := b"1111110000000111111";
