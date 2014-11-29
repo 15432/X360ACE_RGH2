@@ -1,4 +1,4 @@
--- advanced RGH2 code for x360ace by 15432 ^_^
+-- advanced R-JTAG code for x360ace by 15432 ^_^
 -- thx to GliGli
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -9,7 +9,7 @@ entity post_proc is
     Port ( POSTBIT : in  STD_LOGIC;
 			  CLK : in STD_LOGIC;
            to_slow : out  STD_LOGIC := '0';
-			  RST : inout STD_LOGIC := '1';
+			  RST : inout STD_LOGIC := 'Z';
            DBG : out  STD_LOGIC := '0');
 end post_proc;
 
