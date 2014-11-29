@@ -46,3 +46,5 @@ rgh2_phat/sch2HdlBatchFile
 *.err
 *.xbcd
 *.lst
+*.projectmgr
+rjtag_phat/sch2HdlBatchFile

@@ -63,8 +63,7 @@
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
         <branch name="DBG">
-            <wire x2="848" y1="1184" y2="1184" x1="832" />
-            <wire x2="864" y1="1184" y2="1184" x1="848" />
+            <wire x2="864" y1="1184" y2="1184" x1="832" />
         </branch>
         <branch name="SCL">
             <wire x2="1856" y1="992" y2="992" x1="1840" />
@@ -75,9 +74,7 @@
         <instance x="448" y="1216" name="XLXI_1" orien="R0">
         </instance>
         <branch name="XLXN_37">
-            <wire x2="928" y1="992" y2="992" x1="832" />
-            <wire x2="1312" y1="992" y2="992" x1="928" />
-            <wire x2="1328" y1="992" y2="992" x1="1312" />
+            <wire x2="1328" y1="992" y2="992" x1="832" />
             <wire x2="1328" y1="992" y2="1056" x1="1328" />
             <wire x2="1456" y1="1056" y2="1056" x1="1328" />
         </branch>
@@ -95,13 +92,13 @@
         <branch name="RST">
             <wire x2="448" y1="1248" y2="1248" x1="416" />
         </branch>
-        <iomarker fontsize="28" x="416" y="1248" name="RST" orien="R180" />
         <branch name="CLK">
             <wire x2="448" y1="1312" y2="1312" x1="384" />
-            <wire x2="384" y1="1312" y2="1472" x1="384" />
-            <wire x2="896" y1="1472" y2="1472" x1="384" />
-            <wire x2="992" y1="1472" y2="1472" x1="896" />
+            <wire x2="384" y1="1312" y2="1536" x1="384" />
+            <wire x2="896" y1="1536" y2="1536" x1="384" />
             <wire x2="896" y1="1312" y2="1472" x1="896" />
+            <wire x2="992" y1="1472" y2="1472" x1="896" />
+            <wire x2="896" y1="1472" y2="1536" x1="896" />
             <wire x2="992" y1="1312" y2="1312" x1="896" />
         </branch>
         <branch name="XLXN_55">
@@ -113,5 +110,6 @@
             <wire x2="1456" y1="1312" y2="1312" x1="1376" />
         </branch>
         <iomarker fontsize="28" x="992" y="1472" name="CLK" orien="R0" />
+        <iomarker fontsize="28" x="416" y="1248" name="RST" orien="R180" />
     </sheet>
 </drawing>
