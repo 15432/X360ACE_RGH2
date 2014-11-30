@@ -15,17 +15,11 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_START: integer := 85351; --jasper: 85351
+constant R_START: integer := 85352; --jasper: 85352
 constant T_END: integer := 131071;
-constant RESET_LENGTH: integer := 7; 
-constant FORCE_LENGTH: integer := 6;
-constant SIZE : integer := RESET_LENGTH + FORCE_LENGTH*2-1;
 
-constant FORCE: STD_LOGIC_VECTOR(0 to FORCE_LENGTH-1) := (others => '1');
-constant RESET_CENTER : STD_LOGIC_VECTOR(0 to RESET_LENGTH-1) := (others => '0');
-
---the main optimization magic 
-constant RESET_VECTOR : STD_LOGIC_VECTOR(0 to SIZE) := FORCE & RESET_CENTER & FORCE;
+constant R_LEN: integer := 2; --jasper: 2
+constant R_FORCE: integer := 10;
 
 signal cnt : integer range 0 to T_END := 0;
 
@@ -57,10 +51,14 @@ if CLK'event then --300 mhz precision, yay!
 		cnt <= 0;
 	end if;
 	
-	if(cnt >= R_START and cnt <= R_START + SIZE) then
-		RST <= RESET_VECTOR(cnt - R_START);
+	if(cnt >= R_START and cnt < R_START + R_LEN) then
+		RST <= '0';
 	else
-		RST <= 'Z';
+		if(cnt >= R_START + R_LEN and cnt < R_START + R_LEN + R_FORCE) then
+			RST <= '1';
+		else
+			RST <= 'Z';
+		end if;
 	end if;
 end if;
 end process;
