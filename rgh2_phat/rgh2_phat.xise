@@ -17,7 +17,7 @@
   <files>
     <file xil_pn:name="overall.sch" xil_pn:type="FILE_SCHEMATIC">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
     </file>
     <file xil_pn:name="post_proc.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="2"/>
@@ -50,8 +50,8 @@
     <property xil_pn:name="Case" xil_pn:value="Maintain" xil_pn:valueState="default"/>
     <property xil_pn:name="Case Implementation Style" xil_pn:value="None" xil_pn:valueState="default"/>
     <property xil_pn:name="Clock Enable" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Collapsing Input Limit (4-40)" xil_pn:value="40" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Collapsing Pterm Limit (3-56)" xil_pn:value="56" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Collapsing Input Limit (4-40)" xil_pn:value="30" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Collapsing Pterm Limit (3-56)" xil_pn:value="50" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Compile CPLD Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Compile SIMPRIM (Timing) Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Compile UNISIM (Functional) Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>

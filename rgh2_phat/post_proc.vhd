@@ -15,17 +15,9 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_START: integer := 54236; --jasper: 54234 - 54238
-constant T_END: integer := 65535;
-constant RESET_LENGTH: integer := 7; --jasper: 6-8
-constant FORCE_LENGTH: integer := 6;
-constant SIZE : integer := RESET_LENGTH + FORCE_LENGTH*2-1;
-
-constant FORCE: STD_LOGIC_VECTOR(0 to FORCE_LENGTH-1) := (others => '1');
-constant RESET_CENTER : STD_LOGIC_VECTOR(0 to RESET_LENGTH-1) := (others => '0');
-
---the main optimization magic 
-constant RESET_VECTOR : STD_LOGIC_VECTOR(0 to SIZE) := FORCE & RESET_CENTER & FORCE;
+constant R_LEN : integer := 4; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
+constant R_START: integer := 27120; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
+constant T_END: integer := 32767;
 
 signal cnt : integer range 0 to T_END := 0;
 
@@ -35,21 +27,22 @@ begin
 process (POSTBIT) is
 begin
 	if POSTBIT'event then 
-		if(RST = '0') then -- I could use my magic is_10 detection 
-			postcnt <= 0;	 -- ... but this one is much simpler, ok
-		else					 -- anyway hard_reset failed the HW init ...
+		if(RST = '0') then 
+			postcnt <= 0;	 
+		else					 
 			if(postcnt < post_max) then
 				postcnt <= postcnt + 1;
 			end if;
 		end if;
 	end if;
-	DBG <= POSTBIT; --visual rater? simple!
+	DBG <= POSTBIT;
 end process;
 
 process (clk) is
 begin
-if CLK'event then --300 mhz precision, yay!
-	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then --another magic, post'event is slowpoke
+if rising_edge(clk) then		--150 MHz
+--if CLK'event then				--300 MHz
+	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
 		if(cnt < T_END) then
 			cnt <= cnt + 1;
 		end if;
@@ -57,17 +50,21 @@ if CLK'event then --300 mhz precision, yay!
 		cnt <= 0;
 	end if;
 	
-	if(cnt >= R_START and cnt <= R_START + SIZE) then
-		RST <= RESET_VECTOR(cnt - R_START);
+	if(cnt >= R_START and cnt < R_START + R_LEN) then
+		RST <= '0';
 	else
-		RST <= 'Z';
+		if(cnt = R_START + R_LEN) then
+			RST <= '1';
+		else
+			RST <= 'Z';
+		end if;
 	end if;
 end if;
 end process;
 
 process (postcnt) is
 begin	
-	if postcnt = 12 then -- i2c slower. might be 'special'. like here, with delay
+	if postcnt = 12 then
 		to_slow <= '1';
 	else
 		to_slow <= '0';
