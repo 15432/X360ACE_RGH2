@@ -15,9 +15,11 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 4; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
-constant R_START: integer := 27120; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
-constant T_END: integer := 32767;
+constant R_LEN : integer := 1; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
+--alt rst point!	--jasper_300 2 --jasper_150 1
+constant R_START: integer := 27124; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
+--alt rst point!	--jasper_300 54247 --jasper_150 27123
+constant T_END: integer := 65535;
 
 signal cnt : integer range 0 to T_END := 0;
 
