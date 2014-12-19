@@ -20,7 +20,7 @@ signal p_slow: STD_LOGIC := '0';
 signal i2ccnt: integer range 0 to 255 := 255;
 begin
 
-process(CLK3) is
+process(CLK3, i2ccnt, p_slow) is
 begin
 	if rising_edge(CLK3) then
 		if i2ccnt /= 255 then
