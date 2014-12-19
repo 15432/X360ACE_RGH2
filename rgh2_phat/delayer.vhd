@@ -1,16 +1,16 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- this shit saves the 1.5 seconds (only in case of successfull start)
+-- this shit saves the 1.5 seconds (only in case of successfull start or special SMC)
 
 entity delayer is
     Port ( to_slow : in  STD_LOGIC;
            de_slow : out  STD_LOGIC;
-           CLK3 : in  STD_LOGIC); --300/2 / 200 / 2 / 20 / 2 = 9375 hz
+           CLK3 : in  STD_LOGIC); 
 end delayer;
 
 architecture arch of delayer is
-signal cnt: integer range 0 to 6000 := 0;
+signal cnt: integer range 0 to 511 := 0;
 begin
 process(to_slow, CLK3) is
 begin
@@ -19,13 +19,11 @@ if(to_slow = '0') then
 	cnt <= 0;
 else
 	if(rising_edge(CLK3) ) then
-		if (cnt < 6000) then
+		if (cnt < 511) then
 			cnt <= cnt + 1;
-		end if;
-		if(cnt > 5700) then
-			de_slow <= '1';
-		else
 			de_slow <= '0';
+		else
+			de_slow <= '1';
 		end if;
 	end if;
 end if;

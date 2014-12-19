@@ -1,7 +1,6 @@
 *.lso
 *.cmd_log
 *.spl
-*.sym
 *.xreport
 *.jhd
 *.prj

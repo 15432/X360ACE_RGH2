@@ -25,6 +25,8 @@ signal cnt : integer range 0 to T_END := 0;
 
 constant post_max : integer := 15;
 signal postcnt: integer range 0 to post_max := 0;
+signal stop1: STD_LOGIC := '0';
+signal stop2: STD_LOGIC := '0';
 begin
 process (POSTBIT) is
 begin
@@ -45,11 +47,14 @@ begin
 if rising_edge(clk) then		--150 MHz
 --if CLK'event then				--300 MHz
 	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
-		if(cnt < T_END) then
+		if(stop2 = '0') then
 			cnt <= cnt + 1;
+			stop2 <= stop1;
 		end if;
 	else
 		cnt <= 0;
+		stop1 <= '0';
+		stop2 <= '0';
 	end if;
 	
 	if(cnt >= R_START and cnt < R_START + R_LEN) then
@@ -57,6 +62,7 @@ if rising_edge(clk) then		--150 MHz
 	else
 		if(cnt = R_START + R_LEN) then
 			RST <= '1';
+			stop1 <= '1';
 		else
 			RST <= 'Z';
 		end if;
