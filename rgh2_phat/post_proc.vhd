@@ -15,10 +15,10 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 2; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
---alt rst point!	--jasper_300 2 --jasper_150 1
-constant R_START: integer := 54248; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
---alt rst point!	--jasper_300 54247 --jasper_150 27124
+constant R_LEN : integer := 1;
+
+constant R_START: integer := 54249; --54250
+
 constant T_END: integer := 65535;
 
 signal cnt : integer range 0 to T_END := 0;
@@ -44,7 +44,7 @@ process (clk) is
 begin
 --if rising_edge(clk) then		--150 MHz
 if CLK'event then			   	--300 MHz
-	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
+	if(postcnt = 11 or (postcnt = 10 and postbit = '1')) then
 		if(cnt /= 65535) then
 			cnt <= cnt + 1;
 		end if;
@@ -66,7 +66,7 @@ end process;
 
 process (postcnt) is
 begin	
-	if postcnt = 12 then
+	if postcnt = 10 then
 		to_slow <= '1';
 	else
 		to_slow <= '0';
