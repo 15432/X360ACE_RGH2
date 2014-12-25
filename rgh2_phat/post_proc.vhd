@@ -17,7 +17,7 @@ architecture arch of post_proc is
 
 constant R_LEN : integer := 1;
 
-constant R_START: integer := 54249; --54250
+constant R_END: integer := 54250;
 
 constant T_END: integer := 65535;
 
@@ -52,10 +52,10 @@ if CLK'event then			   	--300 MHz
 		cnt <= 0;
 	end if;
 	
-	if(cnt >= R_START and cnt < R_START + R_LEN) then
+	if(cnt >= R_END - R_LEN and cnt < R_END) then
 		RST <= '0';
 	else
-		if(cnt = R_START + R_LEN) then
+		if(cnt = R_END) then
 			RST <= '1';
 		else
 			RST <= 'Z';
