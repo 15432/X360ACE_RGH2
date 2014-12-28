@@ -15,11 +15,11 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 3;
+constant R_LEN : integer := 1;
 
-constant R_END: integer := 54253;
+constant R_END: integer := 34166;
 
-constant T_END: integer := 65535;
+constant T_END: integer := R_END + 2;
 
 signal cnt : integer range 0 to T_END := 0;
 
