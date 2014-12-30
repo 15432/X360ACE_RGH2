@@ -19,7 +19,7 @@ constant R_LEN : integer := 2; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
 --alt rst point!	--jasper_300 2 --jasper_150 1
 constant R_END: integer := 27451; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
 --alt rst point!	--jasper_300 54247 --jasper_150 27124
-constant T_END: integer := 65535;
+constant T_END: integer := R_END + 2;
 
 signal cnt : integer range 0 to T_END := 0;
 
