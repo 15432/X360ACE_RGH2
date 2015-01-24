@@ -8,6 +8,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity post_proc is
     Port ( POSTBIT : in  STD_LOGIC;
 			  CLK : in STD_LOGIC;
+			  is_slow : in STD_LOGIC;
            to_slow : out  STD_LOGIC := '0';
 			  RST : inout STD_LOGIC := 'Z';
            DBG : out  STD_LOGIC := '0');
@@ -15,9 +16,9 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 3;
+constant R_LEN : integer := 2;
 
-constant R_END: integer := 54253;
+constant R_END: integer := 54252;
 
 constant T_END: integer := 65535;
 
@@ -52,10 +53,10 @@ if CLK'event then 			 	--300 MHz
 		cnt <= 0;
 	end if;
 	
-	if(cnt >= R_END - R_LEN and cnt < R_END) then
+	if(cnt >= R_END - R_LEN and cnt < R_END and is_slow = '1') then
 		RST <= '0';
 	else
-		if(cnt = R_END) then
+		if(cnt = R_END and is_slow = '1') then
 			RST <= '1';
 		else
 			RST <= 'Z';

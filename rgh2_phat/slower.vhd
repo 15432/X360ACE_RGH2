@@ -11,6 +11,7 @@ entity slower is
   );
     Port ( CLK3 : in  STD_LOGIC;
            to_slow : in  STD_LOGIC;
+			  callback : out STD_LOGIC := '0';
            SCL : out  STD_LOGIC := '1';
            SDA : out  STD_LOGIC := '1');
 end slower;
@@ -31,6 +32,12 @@ begin
 				i2ccnt <= 0;
 			end if;
 		end if;
+	end if;
+	
+	if (p_slow = '1' and i2ccnt = 255) or (p_slow = '0' and i2ccnt /= 255) then
+		callback <= '1';
+	else
+		callback <= '0';
 	end if;
 	
 	if ((p_slow = '1') and (SDA_SLOW_BITS(i2ccnt) = '1')) or ((p_slow = '0') and (SDA_FAST_BITS(i2ccnt) = '1')) then
