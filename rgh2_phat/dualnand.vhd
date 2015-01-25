@@ -5,8 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity dualnand is
     Port ( RST : in  STD_LOGIC;
            BUT : in  STD_LOGIC;
-           CES : out  STD_LOGIC := '0';
-           CED : out  STD_LOGIC := '0';
+           CES : out  STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+           CED : out  STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
            SMC : out  STD_LOGIC := 'Z';
            CLK : in  STD_LOGIC;
 			  LED : out STD_LOGIC  := '0');
@@ -30,7 +30,7 @@ begin
 		
 		if (BUT = '1' and enabled = '0') then
 			enabled <= '1';
-			CED <= 'Z';
+			CED <= (others => 'Z');
 		end if;
 		
 		if (enabled = '1') then
@@ -49,13 +49,13 @@ begin
 			
 			if(pre_sw /= switch) then
 				if(switch = '0') then
-					CED <= '0';
-					CES <= 'Z';
+					CED <= (others => '0');
+					CES <= (others => 'Z');
 					counter_led <= b"1111111111";
 					counter_smc <= 127;
 				else
-					CED <= 'Z';
-					CES <= '0';
+					CED <= (others => 'Z');
+					CES <= (others => '0');
 					counter_led <= b"0111111111";
 					counter_smc <= 127;
 				end if;
