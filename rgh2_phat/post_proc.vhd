@@ -18,7 +18,7 @@ architecture arch of post_proc is
 
 constant R_LEN : integer := 2;
 
-constant R_END: integer := 54252;
+constant R_END: integer := 68333;
 
 constant T_END: integer := R_END + 2;
 
