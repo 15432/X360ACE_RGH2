@@ -6,25 +6,25 @@
         <trait edittrait="all:0" />
     </attr>
     <netlist>
-        <signal name="XLXN_58" />
-        <signal name="XLXN_59" />
-        <signal name="CLK" />
         <signal name="POST" />
         <signal name="DBG" />
         <signal name="RST" />
         <signal name="SCL" />
         <signal name="SDA" />
-        <signal name="XLXN_68" />
         <signal name="XLXN_70" />
         <signal name="XLXN_72" />
         <signal name="XLXN_73" />
         <signal name="XLXN_74" />
-        <port polarity="Input" name="CLK" />
+        <signal name="XLXN_77" />
+        <signal name="CLK" />
+        <signal name="GCK" />
         <port polarity="Input" name="POST" />
         <port polarity="Output" name="DBG" />
         <port polarity="BiDirectional" name="RST" />
         <port polarity="Output" name="SCL" />
         <port polarity="Output" name="SDA" />
+        <port polarity="Input" name="CLK" />
+        <port polarity="BiDirectional" name="GCK" />
         <blockdef name="post_proc">
             <timestamp>2014-12-19T11:8:51</timestamp>
             <rect width="256" x="64" y="-192" height="192" />
@@ -55,9 +55,16 @@
             <line x2="0" y1="-32" y2="-32" x1="64" />
             <line x2="384" y1="-96" y2="-96" x1="320" />
         </blockdef>
+        <blockdef name="weird">
+            <timestamp>2015-2-22T18:31:57</timestamp>
+            <rect width="256" x="64" y="-128" height="128" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <line x2="384" y1="-96" y2="-96" x1="320" />
+            <line x2="384" y1="-32" y2="-32" x1="320" />
+        </blockdef>
         <block symbolname="post_proc" name="XLXI_7">
             <blockpin signalname="POST" name="POSTBIT" />
-            <blockpin signalname="CLK" name="CLK" />
+            <blockpin signalname="XLXN_77" name="CLK" />
             <blockpin signalname="XLXN_70" name="to_slow" />
             <blockpin signalname="DBG" name="DBG" />
             <blockpin signalname="RST" name="RST" />
@@ -69,7 +76,7 @@
             <blockpin signalname="SDA" name="SDA" />
         </block>
         <block symbolname="divider_slow" name="XLXI_10">
-            <blockpin signalname="CLK" name="CLK" />
+            <blockpin signalname="XLXN_77" name="CLK" />
             <blockpin signalname="XLXN_72" name="CLK3" />
         </block>
         <block symbolname="delayer" name="XLXI_13">
@@ -81,6 +88,11 @@
             <blockpin signalname="XLXN_72" name="CLK" />
             <blockpin signalname="XLXN_74" name="CLK3" />
         </block>
+        <block symbolname="weird" name="XLXI_16">
+            <blockpin signalname="CLK" name="CLK" />
+            <blockpin signalname="XLXN_77" name="GCK_I" />
+            <blockpin signalname="GCK" name="GCK" />
+        </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
         <instance x="1024" y="1248" name="XLXI_7" orien="R0">
@@ -89,12 +101,6 @@
         </instance>
         <instance x="1440" y="1456" name="XLXI_10" orien="R0">
         </instance>
-        <branch name="CLK">
-            <wire x2="1024" y1="1424" y2="1424" x1="944" />
-            <wire x2="1440" y1="1424" y2="1424" x1="1024" />
-            <wire x2="1024" y1="1216" y2="1424" x1="1024" />
-        </branch>
-        <iomarker fontsize="28" x="944" y="1424" name="CLK" orien="R180" />
         <branch name="POST">
             <wire x2="1024" y1="1088" y2="1088" x1="992" />
         </branch>
@@ -142,5 +148,23 @@
             <wire x2="2672" y1="976" y2="1424" x1="2672" />
             <wire x2="2672" y1="1424" y2="1424" x1="2320" />
         </branch>
+        <instance x="608" y="1616" name="XLXI_16" orien="R0">
+        </instance>
+        <branch name="XLXN_77">
+            <wire x2="944" y1="1216" y2="1424" x1="944" />
+            <wire x2="1072" y1="1424" y2="1424" x1="944" />
+            <wire x2="1072" y1="1424" y2="1520" x1="1072" />
+            <wire x2="1440" y1="1424" y2="1424" x1="1072" />
+            <wire x2="1024" y1="1216" y2="1216" x1="944" />
+            <wire x2="1072" y1="1520" y2="1520" x1="992" />
+        </branch>
+        <branch name="CLK">
+            <wire x2="608" y1="1520" y2="1520" x1="576" />
+        </branch>
+        <iomarker fontsize="28" x="576" y="1520" name="CLK" orien="R180" />
+        <branch name="GCK">
+            <wire x2="1024" y1="1584" y2="1584" x1="992" />
+        </branch>
+        <iomarker fontsize="28" x="1024" y="1584" name="GCK" orien="R0" />
     </sheet>
 </drawing>
