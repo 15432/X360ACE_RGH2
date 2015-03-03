@@ -10,7 +10,7 @@ entity delayer is
 end delayer;
 
 architecture arch of delayer is
-signal cnt: integer range 0 to 500 := 0;
+signal cnt: integer range 0 to 450 := 0;
 begin
 process(to_slow, CLK3) is
 begin
@@ -19,7 +19,7 @@ if(to_slow = '0') then
 	cnt <= 0;
 else
 	if(rising_edge(CLK3) ) then
-		if (cnt < 500) then
+		if (cnt < 450) then
 			cnt <= cnt + 1;
 			de_slow <= '0';
 		else

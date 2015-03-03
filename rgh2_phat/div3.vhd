@@ -1,21 +1,21 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- divides the 300mhz clock into 0.75 mhz
-entity divider_slow is
+-- divides the 300mhz clock into 100 mhz
+entity div3 is
     Port ( CLK : in  STD_LOGIC;
            CLK3 : out  STD_LOGIC);
-end divider_slow;
+end div3;
 
-architecture arch of divider_slow is
-constant div_value : integer := 187;
+architecture arch of div3 is
+constant div_value : integer := 2;
 signal counter: integer range 0 to div_value := 0;
 signal new_clk : STD_LOGIC := '0';
 begin
 
 process (CLK, new_clk) is
 begin
-	if rising_edge(CLK) then
+	if CLK'event then
 		if(counter < div_value) then
 			counter <= counter + 1;
 		else
