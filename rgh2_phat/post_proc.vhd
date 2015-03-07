@@ -16,9 +16,9 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 2;
+constant R_LEN : integer := 1;
 
-constant R_END: integer := 27451;
+constant R_END: integer := 36167; --27126
 
 constant T_END: integer := R_END + 2;
 
@@ -48,8 +48,8 @@ end process;
 
 process (clk) is
 begin
-if rising_edge(clk) then		--150 MHz
---if CLK'event then 			 	--300 MHz
+--if rising_edge(clk) then		--150 MHz
+if CLK'event then 			 	--300 MHz
 	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
 		if(cnt < T_END) then
 			cnt <= cnt + 1;
