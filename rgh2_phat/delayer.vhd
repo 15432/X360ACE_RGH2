@@ -12,26 +12,27 @@ entity delayer is
 end delayer;
 
 architecture arch of delayer is
-constant del: integer := 30;
+constant del: integer := 685;
 signal cnt: integer range 0 to del := 0;
 signal old_do : STD_LOGIC;
+signal old_do1 : STD_LOGIC;
 begin
 process(in_slow, CLK3) is
 begin
+out_slow <= in_slow;
 if(in_slow = '0') then
-	out_slow <= '0';
 	old_do <= in_do;
-	out_do <= in_do;
+	old_do1 <= old_do;
+	out_do <= old_do;
 	cnt <= 0;
 else
 	if(rising_edge(CLK3) ) then
 		if (cnt < del) then
 			cnt <= cnt + 1;
-			out_slow <= '0';
-			out_do <= old_do;
+			out_do <= old_do1;
 		else
-			out_slow <= '1';
 			out_do <= in_do;
+			old_do <= in_do;
 		end if;
 	end if;
 end if;
