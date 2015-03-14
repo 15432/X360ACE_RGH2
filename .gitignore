@@ -48,3 +48,4 @@ rgh2_phat/sch2HdlBatchFile
 *.projectmgr
 rjtag_phat/sch2HdlBatchFile
 *.cmd
+rgh2_phat/overall.jed

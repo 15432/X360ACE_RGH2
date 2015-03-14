@@ -9,24 +9,29 @@ entity post_proc is
     Port ( POSTBIT : in  STD_LOGIC;
 			  CLK : in STD_LOGIC;
            to_slow : out  STD_LOGIC := '0';
+			  to_do : out STD_LOGIC := '0';
 			  RST : inout STD_LOGIC := 'Z';
            DBG : out  STD_LOGIC := '0');
 end post_proc;
 
 architecture arch of post_proc is
 
-constant R_LEN : integer := 2; -- zephyr_150 2 -- jasper_150 3 --jasper_300 7
---alt rst point!	--jasper_300 2 --jasper_150 1
-constant R_END: integer := 27451; -- zephyr_150 27449 -- jasper_150 27121 --jasper_300 54242
---alt rst point!	--jasper_300 54247 --jasper_150 27124
+constant R_LEN : integer := 1; --try to keep it 1, please. bad results? -> change the working frequency!
+--alternative cpu reset only. see rjtag schematic
+
+constant R_END: integer := 27124; --jasper 27124 --falcon 27126 --zephyr 27451/27452
+--you can use 300 MHz or 200 MHz, just 
+
 constant T_END: integer := R_END + 2;
 
 signal cnt : integer range 0 to T_END := 0;
 
-constant post_max : integer := 15;
-signal postcnt: integer range 0 to post_max := 0;
+constant post_rgh : integer := 13; --24 for alt post
+constant post_max : integer := post_rgh + 2;
+
+signal postcnt: integer range 0 to post_rgh + 2 := 0;
 begin
-process (POSTBIT) is
+process (POSTBIT, RST) is
 begin
 	if POSTBIT'event then 
 		if(RST = '0') then 
@@ -37,25 +42,30 @@ begin
 			end if;
 		end if;
 	end if;
-	DBG <= POSTBIT;
+	--uncomment for alt post
+	--if(RST = '0') then
+		--DBG <= '0';
+	--else
+		DBG <= POSTBIT; -- not POSTBIT; --for alt post
+	--end if;
 end process;
 
 process (clk) is
 begin
 if rising_edge(clk) then		--150 MHz
---if CLK'event then			   	--300 MHz
-	if(postcnt = 13 or (postcnt = 12 and postbit = '1')) then
-		if(cnt /= T_END) then
+--if CLK'event then 			--300 MHz / 200 MHz (add 300_to_200 module right before post_proc input)
+	if(postcnt = post_rgh ) then
+		if(cnt < T_END) then
 			cnt <= cnt + 1;
 		end if;
 	else
 		cnt <= 0;
 	end if;
 	
-	if(cnt >= R_END-R_LEN and cnt < R_END) then
+	if(cnt >= R_END - R_LEN and cnt < R_END) then
 		RST <= '0';
 	else
-		if(cnt = R_END) then
+		if(cnt = R_END) then --to end the glitch. necessary for phats
 			RST <= '1';
 		else
 			RST <= 'Z';
@@ -66,10 +76,15 @@ end process;
 
 process (postcnt) is
 begin	
-	if postcnt = 12 then
+	if postcnt = post_rgh - 1 then
 		to_slow <= '1';
 	else
 		to_slow <= '0';
+	end if;
+	if(postcnt <= 1 or postcnt = post_rgh - 1) then
+		to_do <= '1'; --to fix bad falcon behaviour
+	else
+		to_do <= '0';
 	end if;
 end process;
 end arch;
