@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- divides the 300mhz clock into 0.75 mhz
+-- used to down the clock for i2c and other things
 entity divider_slow is
     Port ( CLK : in  STD_LOGIC;
            CLK3 : out  STD_LOGIC);

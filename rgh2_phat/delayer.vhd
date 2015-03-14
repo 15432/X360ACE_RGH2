@@ -12,7 +12,8 @@ entity delayer is
 end delayer;
 
 architecture arch of delayer is
-constant del: integer := 685;
+constant del: integer := 685; --max value for jasper is 705, but you should let xbox to stabilize frequency
+										--min adequate value (slim) is 500-550. use it when xbox doesn't start
 signal cnt: integer range 0 to del := 0;
 signal old_do : STD_LOGIC;
 signal old_do1 : STD_LOGIC;
