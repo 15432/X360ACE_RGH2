@@ -15,7 +15,7 @@ end post_proc;
 
 architecture arch of post_proc is
 
-constant R_START: integer := 85352; --jasper: 85352
+constant R_START: integer := 85352; --jasper: 85352 --falcon 89062 --zephyr 86260
 constant T_END: integer := 131071;
 
 constant R_LEN: integer := 2; --jasper: 2
