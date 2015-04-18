@@ -32,7 +32,7 @@ begin
 		--accurate initialization, to prevent bad behaviour
 		if (BUT = '1' and enabled = '0') then
 			enabled <= '1';
-			CED <= 'Z';
+			CED <= '1';
 		end if;
 		--button holding processing
 		if (enabled = '1') then
@@ -52,11 +52,11 @@ begin
 			if(pre_sw /= switch) then
 				if(switch = '0') then
 					CED <= '0';
-					CES <= 'Z';
+					CES <= '1';
 					counter_led <= b"1111111111";
 					counter_smc <= 127;
 				else
-					CED <= 'Z';
+					CED <= '1';
 					CES <= '0';
 					counter_led <= b"0111111111";
 					counter_smc <= 127;
