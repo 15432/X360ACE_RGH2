@@ -12,16 +12,16 @@ end everything;
 
 architecture arch of everything is
 
-constant delay_val : integer := 9617;
+constant delay_val : integer := 9600;
 
 constant post_rgh : integer := 24;
 constant post_max : integer := 31;
 signal postcnt: unsigned (4 downto 0) := "00000";
 
-constant R_LEN : integer := 4; 			
-constant R_STA : integer := 699631;	--1093154 for 150
+constant R_LEN : integer := 2; 			
+constant R_STA : integer := 349831; 
 
-constant T_FRC : integer := 500000;
+constant T_FRC : integer := 50000;
 constant T_END : integer := R_STA + R_LEN + T_FRC;
 signal cnt : integer range 0 to T_END := 0;
 
@@ -66,7 +66,7 @@ end process;
 process (clk, POST) is
 begin
 
-if CLK'event then
+if rising_edge(CLK) then
 	if(postcnt >= post_rgh) then
 		if(cnt < T_END) then
 			cnt <= cnt + 1;
